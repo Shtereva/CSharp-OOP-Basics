@@ -1,0 +1,19 @@
+﻿using System;
+public class Pokemon
+{
+    private string name;
+    private string type;
+
+    public Pokemon(string name, string type)
+    {
+        this.name = name;
+        this.type = type;
+    }
+
+    public override string ToString()
+    {
+        string nl = Environment.NewLine;
+
+        return $"{this.name} {this.type}";
+    }
+}

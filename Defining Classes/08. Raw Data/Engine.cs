@@ -1,0 +1,18 @@
+﻿public class Engine
+{
+    private int engineSpeed;
+    private int enginePower;
+
+    public Engine()
+    {
+
+    }
+
+    public Engine(int engineSpeed, int enginePower)
+    {
+        this.engineSpeed = engineSpeed;
+        this.enginePower = enginePower;
+    }
+
+    public int EnginePower => this.enginePower;
+}
