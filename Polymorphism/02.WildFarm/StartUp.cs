@@ -1,60 +1,48 @@
 ﻿using System;
+using System.Collections.Generic;
 
-public class StartUp
+public class Startup
 {
     public static void Main()
     {
-        bool isLineEven = true;
-        Animal animal = null;
+        List<Animal> animals = new List<Animal>();
+        List<Food> foods = new List<Food>();
 
-        string input;
+        ReadAndParseInput(animals, foods);
+        AnimalsMakeSound(animals, foods);
+        PrintInfo(animals);
+    }
 
-        while ((input = Console.ReadLine()) != "End")
+    private static void PrintInfo(IEnumerable<Animal> animals)
+    {
+        foreach (Animal animal in animals)
         {
-            var args = input.Split();
-            if (!isLineEven)
-            {
-                Food food = args[0] == "Vegetable" ? (Food)new Vegetable(int.Parse(args[1])) : new Meat(int.Parse(args[1]));
-
-                animal.MakeSound();
-                try
-                {
-                    animal.Eat(food);
-                }
-                catch (ArgumentException e)
-                {
-                    Console.WriteLine(e.Message);
-                }
-
-                Console.WriteLine(animal);
-
-                isLineEven = true;
-                continue;
-            }
-
-            animal = GetAnimalType(args);
-
-            isLineEven = false;
+            Console.WriteLine(animal);
         }
     }
 
-    private static Animal GetAnimalType(string[] args)
+    private static void AnimalsMakeSound(List<Animal> animals, List<Food> foods)
     {
-        switch (args[0])
+        for (int i = 0; i < animals.Count; i++)
         {
-            case "Mouse":
-                return new Mouse(args[0], args[1], double.Parse(args[2]), args[3]);
-
-            case "Zebra":
-                return new Zebra(args[0], args[1], double.Parse(args[2]), args[3]);
-
-            case "Tiger":
-                return new Tiger(args[0], args[1], double.Parse(args[2]), args[3]);
-
-            case "Cat":
-                return new Cat(args[0], args[1], double.Parse(args[2]), args[3], args[4]);
+            Console.WriteLine(animals[i].MakeSound());
+            animals[i].Eat(foods[i]);
         }
+    }
 
-        return null;
+    private static void ReadAndParseInput(List<Animal> animals, List<Food> foods)
+    {
+        string input = Console.ReadLine();
+        while (input != "End")
+        {
+            string[] animalParts = input.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+            string[] foodParts = Console.ReadLine().Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+
+            Animal animal = AnimalFactory.GetAnimal(animalParts);
+            Food food = FoodFactory.GetFood(foodParts);
+            animals.Add(animal);
+            foods.Add(food);
+            input = Console.ReadLine();
+        }
     }
 }

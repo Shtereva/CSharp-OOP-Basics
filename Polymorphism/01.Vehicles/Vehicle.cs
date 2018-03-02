@@ -8,9 +8,9 @@ public abstract class Vehicle : IVehicle
 
     public Vehicle(double fuelQuanitity, double fuelConsumptionPerKm, double tankCapacity)
     {
+		this.TankCapacity = tankCapacity;
         this.FuelQuanitity = fuelQuanitity;
         this.FuelConsumptionPerKm = fuelConsumptionPerKm;
-        this.TankCapacity = tankCapacity;
     }
 
     public double FuelQuanitity
@@ -23,7 +23,14 @@ public abstract class Vehicle : IVehicle
                 throw new ArgumentException("Fuel must be a positive number");
             }
 
-            this.fuelQuanitity = value;
+			if(value > this.TankCapacity)
+			{
+				this.fuelQuanitity = 0;
+			}
+			else
+			{
+				this.fuelQuanitity = value;
+			}
         }
     }
 

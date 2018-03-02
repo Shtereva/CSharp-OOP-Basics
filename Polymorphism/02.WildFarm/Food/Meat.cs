@@ -1,6 +1,6 @@
 ﻿public class Meat : Food
 {
-    public Meat(int quantity)
+    public Meat(int quantity) 
         : base(quantity)
     {
     }
