@@ -10,7 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Forum.Models\Forum.Models.csproj" />
+    <ProjectReference Include="..\Forum.Data\Forum.Data.csproj" />
   </ItemGroup>
 
 </Project>

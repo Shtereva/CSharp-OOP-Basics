@@ -6,7 +6,7 @@
         Login,
         Categories,
         OpenCategory,
-        Signup,
+        SignUp,
         ViewPost,
         AddPost,
         AddReply,

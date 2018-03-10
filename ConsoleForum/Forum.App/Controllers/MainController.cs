@@ -46,7 +46,7 @@
                     return MenuState.Login;
 
                 case GuestCommand.SignUp:
-                    return MenuState.Signup;
+                    return MenuState.SignUp;
             }
 
             throw new InvalidCommandException();
