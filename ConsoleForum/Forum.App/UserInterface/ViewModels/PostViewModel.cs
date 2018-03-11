@@ -1,4 +1,8 @@
-﻿namespace Forum.App.UserInterface.ViewModels
+﻿using System.Linq;
+using Forum.App.Services;
+using Forum.Models;
+
+namespace Forum.App.UserInterface.ViewModels
 {
     using System;
     using System.Collections.Generic;
@@ -6,16 +10,6 @@
     public class PostViewModel
     {
         private const int LINE_LENGHT = 37;
-
-        public PostViewModel()
-        {
-            throw new NotImplementedException();
-        }
-
-        private IList<string> GetLines(string content)
-        {
-            throw new NotImplementedException();
-        }
 
         public int PostId { get; set; }
 
@@ -28,5 +22,36 @@
         public IList<string> Content { get; set; }
 
         public IList<ReplyViewModel> Replies { get; set; }
+
+        public PostViewModel()
+        {
+            this.Content = new List<string>();
+        }
+
+        public PostViewModel(Post post)
+        {
+            this.PostId = post.Id;
+            this.Title = post.Title;
+            this.Content = this.GetLines(post.Content);
+            this.Author = UserService.GetUser(post.AuthorId).Username;
+            this.Category = PostService.GetCategory(post.CategoryId).Name;
+            this.Replies = PostService.GetPostReplies(post.Id);
+        }
+
+        private IList<string> GetLines(string content)
+        {
+            var contentChars = content.ToCharArray();   
+
+            IList<string> lines = new List<string>();
+
+            for (int i = 0; i < content.Length; i += LINE_LENGHT)
+            {
+                char[] row = contentChars.Skip(i).Take(LINE_LENGHT).ToArray();
+                string rowString = string.Join("", row);
+                lines.Add(rowString);
+            }
+
+            return lines;
+        }
     }
 }
