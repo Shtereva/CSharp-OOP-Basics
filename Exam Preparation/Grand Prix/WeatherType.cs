@@ -1,9 +1,6 @@
-﻿namespace GrandPrix
+﻿public enum WeatherType
 {
-    public enum WeatherType
-    {
-        Rainy,
-        Foggy,
-        Sunny
-    }
+    Rainy,
+    Foggy,
+    Sunny
 }

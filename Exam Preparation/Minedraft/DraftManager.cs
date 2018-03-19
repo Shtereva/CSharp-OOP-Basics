@@ -21,18 +21,33 @@ public class DraftManager
 
     public string RegisterHarvester(List<string> arguments)
     {
-        var harvester = HarvesterFactory.Create(arguments);
-        this.harvesters.Add(harvester);
+        try
+        {
+            var harvester = HarvesterFactory.Create(arguments);
+            this.harvesters.Add(harvester);
 
-        return $"Successfully registered {arguments[0]} Harvester - {harvester.Id}";
+            return $"Successfully registered {arguments[0]} Harvester - {harvester.Id}";
+        }
+        catch (ArgumentException e)
+        {
+             return e.Message;
+        }
+
     }
 
     public string RegisterProvider(List<string> arguments)
     {
-        var provider = ProviderFactory.Create(arguments);
-        this.providers.Add(provider);
+        try
+        {
+            var provider = ProviderFactory.Create(arguments);
+            this.providers.Add(provider);
 
-        return $"Successfully registered {arguments[0]} Provider - {provider.Id}";
+            return $"Successfully registered {arguments[0]} Provider - {provider.Id}";
+        }
+        catch (ArgumentException e)
+        {
+            return e.Message;
+        }
     }
 
     public string Day()

@@ -6,7 +6,6 @@
         : base(id, oreOutput, energyRequirement)
     {
         this.sonicFactor = factor;
-        base.EnergyRequirement /= this.sonicFactor;
+        this.EnergyRequirement /= this.sonicFactor;
     }
-
 }
